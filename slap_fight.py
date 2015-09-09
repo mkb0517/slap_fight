@@ -4,7 +4,7 @@ import sys
 import time
 from random import randint
 from src.player import Player
-from src.art import logo
+from src.art import logo    
 
 def slap(player1, player2):
     """Determine outcome of a single slapping turn. Return descriptive string"""
@@ -16,15 +16,23 @@ def slap(player1, player2):
     return result
 
 def play_round(player, opponent):
+    start = time.time()
     action = raw_input("WHAT DO YOU WANNA DO? (SLAP OR WAIT)  ")
-    if action.lower() == "slap":
-        outcome = slap(player, opponent)
-        print(outcome)
-        outcome = slap(opponent, player)
-        print(outcome)
-    elif action.lower() == "wait":
-        outcome = slap(opponent, player)
-        print(outcome)
+    end = time.time()
+    if end-start<1:
+        if action.lower() == "slap":
+            outcome = slap(player, opponent)
+            print(outcome)
+            print("You slapped the opponent before they could react!\n")
+    else:
+        if action.lower() == "slap":
+            outcome = slap(player, opponent)
+            print(outcome)
+            outcome = slap(opponent, player)
+            print(outcome)
+        elif action.lower() == "wait":
+            outcome = slap(opponent, player)
+            print(outcome)
 
 # Display logo
 print(logo + "\n")
